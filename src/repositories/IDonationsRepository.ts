@@ -16,8 +16,9 @@ interface ICreateDonationDTO {
 }
 
 interface IDonationsRepository {
-  create(data: ICreateDonationDTO): void;
-  list(): Donation[];
+  create(data: ICreateDonationDTO): Promise<void>;
+  list(): Promise<Donation[]>;
+  findByName(name: string): Promise<Donation>
 }
 
 export { IDonationsRepository, ICreateDonationDTO }

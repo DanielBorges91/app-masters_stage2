@@ -11,6 +11,8 @@ class Donation {
 
   name: string;
 
+  email: string;
+
   phone: string;
 
   zip: string;

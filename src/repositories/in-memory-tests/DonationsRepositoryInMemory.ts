@@ -2,22 +2,10 @@ import { Donation } from "../../model/Donation";
 import { ICreateDonationDTO, IDonationsRepository } from "../IDonationsRepository";
 
 
-class DonationsRepository implements IDonationsRepository {
-  private donations: Donation[];
 
-  private static INSTANCE: DonationsRepository;
+class DonationsRepositoryInMemory implements IDonationsRepository {
 
-  private constructor() {
-    this.donations = [];
-  }
-
-  public static getInstance(): DonationsRepository {
-    if(!DonationsRepository.INSTANCE) {
-      DonationsRepository.INSTANCE = new DonationsRepository();
-    }
-
-    return DonationsRepository.INSTANCE;
-  }
+  donations: Donation[] = [];
 
   async create(data: ICreateDonationDTO): Promise<void> {
     const donation = new Donation();
@@ -26,9 +14,9 @@ class DonationsRepository implements IDonationsRepository {
 
     this.donations.push(donation);
   }
-
   async list(): Promise<Donation[]> {
-    return await this.donations;
+    const all = await this.donations;
+    return all;
   }
 
   async findByName(name: string): Promise<Donation> {
@@ -36,4 +24,4 @@ class DonationsRepository implements IDonationsRepository {
   }
 }
 
-export { DonationsRepository };
+export { DonationsRepositoryInMemory }
